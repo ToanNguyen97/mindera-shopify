@@ -19,8 +19,8 @@ This is a headless e-commerce implementation built with Next.js and TypeScript t
    ```
 3. Create a `.env.local` file with your Shopify credentials:
    ```
-   NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=mindera-test-store.myshopify.com
-   NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=3840
+   NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=xxxxx
+   NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=xxxxx
    ```
 4. Run the development server:
    ```
