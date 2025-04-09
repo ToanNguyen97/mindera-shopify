@@ -1,15 +1,15 @@
-
 import { Suspense } from 'react';
 import { ProductsLoading } from '@shop/components/loading/products';
-import { HeroModule } from '@shop/modules/hero';
 import { ProductsModule } from '@shop/modules/products';
+import { HeroModule } from '@shop/modules/hero';
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-const HomePage = () => {
+export default function ProductsPage() {
 
   return (
-    <div>
+    <div className='pb-16'>
       <HeroModule/>
       <Suspense fallback={<ProductsLoading />}>
         <ProductsModule />
@@ -17,5 +17,3 @@ const HomePage = () => {
     </div>
   );
 }
-
-export default HomePage;
