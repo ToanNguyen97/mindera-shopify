@@ -1,4 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Headless Shopify Product Listing Page
+
+This is a headless e-commerce implementation built with Next.js and TypeScript that connects to a Shopify store.
+
+## Features
+
+- Connect to Shopify Storefront API
+- Display products with stock available
+- Sort products by price (low to high or high to low)
+- Load 12 products at a time with a "Load More" button
+- Responsive design matching the provided mockup
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Create a `.env.local` file with your Shopify credentials:
+   ```
+   NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=mindera-test-store.myshopify.com
+   NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=3840
+   ```
+4. Run the development server:
+   ```
+   npm run dev
+   ```
+5. Open [http://localhost:3000/products](http://localhost:3000/products) to view the product listing page
+
+## Implementation Notes
+
+- The application uses the Shopify Storefront API to fetch products
+- Only products with available stock are displayed
+- The design follows the provided mockup
+- Features like tags (Sale, Exclusive), color variations, basket icons, navigation, and filters were not implemented as per requirements
+
+## Technologies Used
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Shadcn UI components
+- Shopify Storefront API
 
 ## Getting Started
 
