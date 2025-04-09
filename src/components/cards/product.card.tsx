@@ -19,7 +19,11 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
   );
 
   return (
-    <Link href={`/products/${encodeURIComponent(handle)}`} className="block outline-none">
+    <Link
+      href={`/products/${encodeURIComponent(handle)}`}
+      className="block outline-none"
+      aria-label={title}
+    >
       <div className={className}>
         <div className="mb-2">
           <div className="relative aspect-square overflow-hidden bg-gray-400">

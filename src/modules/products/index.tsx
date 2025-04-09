@@ -57,16 +57,24 @@ export const ProductsModule = () => {
 
   const renderProducts = useMemo(() => {
     return products.map((product) => (
-      <ProductCard key={product.id} product={product} />
+      <li key={product.id}>
+        <ProductCard product={product} />
+      </li>
     ));
   }, [products]);
 
   return (
     <section className="space-y-6 max-w-6xl mx-auto">
-      <div className='grid grid-cols-2 border border-t-0 border-gray-200'>
+      <div
+        className='grid grid-cols-2 border border-t-0 border-gray-200'
+        role='toolbar'
+        aria-label='filter and sort toolbar'
+      >
         <Button
           onClick={() => handleSortChange(!isSortLowToHigh)}
           variant="ghost"
+          aria-label={`Sort ${isSortLowToHigh ? 'high to low' : 'low to high'}`}
+          aria-pressed={isSortLowToHigh}
           className='rounded-none uppercase h-10 border-r border-gray-200 flex items-center justify-center gap-x-2'
         >
           <ArrowUpDown className="w-4 h-4" />
@@ -74,24 +82,27 @@ export const ProductsModule = () => {
         </Button>
         <Button
           variant="ghost"
+          aria-label="Filter"
           className='uppercase h-10 rounded-none border-gray-200 flex items-center justify-center gap-x-2'
         >
           <SlidersHorizontal className="w-4 h-4" />
           Filter
         </Button>
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         <If condition={renderProducts.length > 0}>
           {renderProducts}
         </If>
         <If condition={isLoading}>
           {
             Array.from({ length: PRODUCT_COUNT }).map((_, index) => (
-              <ProductCardLoading key={index} />
+              <li key={index}>
+                <ProductCardLoading key={index} />
+              </li>
             ))
           }
         </If>
-      </div>
+      </ul>
       <If condition={hasMore}>
         <div className="flex justify-center mt-8">
           <Button
@@ -99,6 +110,8 @@ export const ProductsModule = () => {
             onClick={handleLoadMore}
             disabled={isLoading}
             className="px-8 rounded-none"
+            aria-label="Load more products"
+            aria-busy={isLoading}
           >
             <If condition={isLoading}>
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -107,6 +120,17 @@ export const ProductsModule = () => {
           </Button>
         </div>
       </If>
+      <span aria-live="polite" className='sr-only'>
+        <If condition={isLoading}>
+          Loading products...
+        </If>
+        <If condition={hasMore}>
+          More products loaded
+        </If>
+        <If condition={!hasMore}>
+          No more products
+        </If>
+      </span>
     </section>
   );
 }
