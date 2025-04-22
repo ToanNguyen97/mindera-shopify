@@ -24,7 +24,8 @@ export const ProductsModule = () => {
         first: PRODUCT_COUNT,
         after: resetProducts ? undefined : cursor || undefined,
         sortKey: 'PRICE',
-        reverse: isSortHighToLow
+        reverse: isSortHighToLow,
+        query: 'available_for_sale:true'
       });
 
       setProducts(prev => resetProducts ? newProducts : [...prev, ...newProducts]);
