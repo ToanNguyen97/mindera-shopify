@@ -15,7 +15,7 @@ export const ProductsModule = () => {
   const [cursor, setCursor] = useState<string | null>();
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSortLowToHigh, setIsSortLowToHigh] = useState<boolean>(true);
+  const [isSortHighToLow, setIsSortHighToLow] = useState<boolean>(false);
 
   const fetchProducts = useCallback(async (resetProducts = false) => {
     setIsLoading(true);
@@ -24,7 +24,7 @@ export const ProductsModule = () => {
         first: PRODUCT_COUNT,
         after: resetProducts ? undefined : cursor || undefined,
         sortKey: 'PRICE',
-        reverse: isSortLowToHigh
+        reverse: isSortHighToLow
       });
 
       setProducts(prev => resetProducts ? newProducts : [...prev, ...newProducts]);
@@ -35,15 +35,15 @@ export const ProductsModule = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [cursor, isSortLowToHigh]);
+  }, [cursor, isSortHighToLow]);
 
   useEffect(() => {
     fetchProducts(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSortLowToHigh]);
+  }, [isSortHighToLow]);
 
-  const handleSortChange = useCallback((isSortLowToHigh: boolean) => {
-    setIsSortLowToHigh(isSortLowToHigh);
+  const handleSortChange = useCallback((isSortHighToLow: boolean) => {
+    setIsSortHighToLow(isSortHighToLow);
     setCursor(null);
     setHasMore(true);
     setProducts([]);
@@ -71,10 +71,10 @@ export const ProductsModule = () => {
         aria-label='filter and sort toolbar'
       >
         <Button
-          onClick={() => handleSortChange(!isSortLowToHigh)}
+          onClick={() => handleSortChange(!isSortHighToLow)}
           variant="ghost"
-          aria-label={`Sort ${isSortLowToHigh ? 'high to low' : 'low to high'}`}
-          aria-pressed={isSortLowToHigh}
+          aria-label={`Sort ${isSortHighToLow ? 'high to low' : 'low to high'}`}
+          aria-pressed={isSortHighToLow}
           className='rounded-none uppercase h-10 border-r border-gray-200 flex items-center justify-center gap-x-2'
         >
           <ArrowUpDown className="w-4 h-4" />
